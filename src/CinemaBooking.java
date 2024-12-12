@@ -18,10 +18,33 @@ public class CinemaBooking {
         int row, col, option;
         String[] history;
         int historyBookSeat = 0;
-        System.out.print("[+] Insert Row: ");
-        row = scanner.nextInt();
-        System.out.print("[+] Insert Column: ");
-        col = scanner.nextInt();
+
+        while (true) {
+            try{
+                System.out.print("[+] Insert Row: ");
+                String inputRow = scanner.nextLine();
+                row = Integer.parseInt(inputRow);
+                if (row <= 0){
+                    System.out.println("Please Input Positive Number");
+                } else break;
+            } catch (NumberFormatException e) {
+                System.out.println("Please Input Only Number");
+            }
+        }
+
+        while (true){
+            try{
+                System.out.print("[+] Insert Column: ");
+                String inputColumn = scanner.nextLine();
+                col = Integer.parseInt(inputColumn);
+                if (col <= 0){
+                    System.out.println("Please Input Positive Number");
+                } else break;
+            }catch (NumberFormatException e) {
+                System.out.println("Please Input Only Number");
+            }
+        }
+
         String[][] cinema = new String[row][col];
         history = new String[row*col];
 
@@ -46,11 +69,13 @@ public class CinemaBooking {
             option = scanner.nextInt();
             switch (option) {
                 case 1 -> {
-                    System.out.println("*************************************************");
-                    System.out.println("*                                               *");
-                    System.out.println("*        🎥   BOOK YOUR MOVIE TICKET   🎥         *");
-                    System.out.println("*                                               *");
-                    System.out.println("*************************************************");
+                    System.out.println("""
+                            *************************************************
+                            *                                               *
+                            *        🎥   Booking YOUR MOVIE TICKET   🎥     *
+                            *                                               *
+                            *************************************************
+                            """);
                     System.out.println();
 
                     char letter = 'A';
@@ -67,8 +92,8 @@ public class CinemaBooking {
                     }
 
                     System.out.println("# INSTRUCTION");
-                    System.out.println("# Single: C-1");
-                    System.out.println("# Multiple (separate by comma): C-1,C-2");
+                    System.out.println("# Single: A-1");
+                    System.out.println("# Multiple (separate by comma): B-1,B-2");
                     System.out.print("> Please select available seat: ");
                     String selectedSeat = scanner.next();
 
@@ -111,14 +136,16 @@ public class CinemaBooking {
                            historyBookSeat++;
 
                        }
-                    break;
+//                    break;
                 }
                 case 2 -> {
-                    System.out.println("*************************************************");
-                    System.out.println("*                                               *");
-                    System.out.println("*        🎥   CANCEL YOUR MOVIE TICKET   🎥         *");
-                    System.out.println("*                                               *");
-                    System.out.println("*************************************************");
+                    System.out.println("""
+                            *************************************************
+                            *                                               *
+                            *        🎥   CANCEL YOUR MOVIE TICKET   🎥     *
+                            *                                               *
+                            *************************************************
+                            """);
                     System.out.println();
 
                     char letter = 'A';
