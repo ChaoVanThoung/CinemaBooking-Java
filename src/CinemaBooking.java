@@ -65,8 +65,21 @@ public class CinemaBooking {
             System.out.println(RED + "2." + RESET + " Cancel Booking");
             System.out.println(RED + "3." + RESET + " View The History Of Booking Seat");
             System.out.println(RED + "4." + RESET + " Exit the application");
-            System.out.print("\n🎬 Please select an option to proceed: ");
-            option = scanner.nextInt();
+
+            while (true){
+                try{
+                    System.out.print("\n🎬 Please select an option to proceed: ");
+                    String inputOption = scanner.nextLine();
+                    option = Integer.parseInt(inputOption);
+                    if (option <= 0 ){
+                        System.out.println("Please Input Positive Number");
+
+                    } else break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Please Input Only Number");
+                }
+            }
+
             switch (option) {
                 case 1 -> {
                     System.out.println("""
@@ -186,8 +199,15 @@ public class CinemaBooking {
                             for (int i=0; i < historyBookSeat; i++){
                                 if (history[i] != null && history[i].contains(seat)){
                                     history[i] = null;
+
+                                    for (int j = i; j < historyBookSeat - 1; j++) {
+                                        history[j] = history[j + 1];
+                                    }
+                                    history[historyBookSeat - 1] = null;
                                     historyBookSeat--;
+                                    break;
                                 }
+
                             }
 
                             System.out.println(GREEN + "Seat cancelled successfully" + RESET);
