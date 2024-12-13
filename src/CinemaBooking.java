@@ -107,17 +107,52 @@ public class CinemaBooking {
                     System.out.println("# INSTRUCTION");
                     System.out.println("# Single: A-1");
                     System.out.println("# Multiple (separate by comma): B-1,B-2");
-                    System.out.print("> Please select available seat: ");
-                    String selectedSeat = scanner.next();
 
-                    String[] seats ;
+                    boolean validInput = false;
+                    String[] seats = null;
+
+                    while (!validInput) {
+                        System.out.print("> Please select available seat: ");
+                        String selectedSeat = scanner.next();
+
+                        // Split input into single or multiple seats
+                        if (selectedSeat.contains(",")) {
+                            seats = selectedSeat.split(",");
+                        } else {
+                            seats = new String[]{selectedSeat};
+                        }
+
+                        // Validate each seat in the input
+                        validInput = true;
+                        for (String seat : seats) {
+                            seat = seat.trim();
+
+                            // Check format (e.g., "A-1")
+                            if (!seat.matches("^[A-Z]-\\d+$")) {
+                                System.out.println(RED + "Invalid format for seat: " + seat + RESET);
+                                validInput = false;
+                                break;
+                            }
+                            String[] seatPart =seat.split("-");
+                            char rowLetter = seatPart[0].charAt(0);
+                            int colNumber = Integer.parseInt(seatPart[1]);
 
 
-                    if (selectedSeat.contains(",")){
-                        seats = selectedSeat.split(",");
-                    } else {
-                        seats = new String[]{selectedSeat};
+                            if (rowLetter < 'A'|| rowLetter >= 'A' + row){
+                                System.out.println(RED + "Row out of bounds for seat: " + seat + RESET);
+                                validInput = false;
+                                break;
+                            }
+                            if (colNumber < 1 || colNumber > col) {
+                                System.out.println(RED + "Column out of bounds for seat: " + seat + RESET);
+                                validInput = false;
+                                break;
+                            }
+
+                        }
                     }
+
+
 
                     for (String seat : seats) {
                         System.out.println(seat);
@@ -176,16 +211,52 @@ public class CinemaBooking {
                     System.out.println("# INSTRUCTION");
                     System.out.println("# Single: C-1");
                     System.out.println("# Multiple (separate by comma): C-1,C-2");
-                    System.out.print("> Please select available seat to cancel: ");
-                    String selectedSeat = scanner.next();
 
-                    String[] seats ;
+                    boolean validInput = false;
+                    String[] seats = null;
 
-                    if (selectedSeat.contains(",")){
-                        seats = selectedSeat.split(",");
-                    } else {
-                        seats = new String[]{selectedSeat};
+                    while (!validInput) {
+                        System.out.print("> Please select available seat: ");
+                        String selectedSeat = scanner.next();
+
+                        // Split input into single or multiple seats
+                        if (selectedSeat.contains(",")) {
+                            seats = selectedSeat.split(",");
+                        } else {
+                            seats = new String[]{selectedSeat};
+                        }
+
+                        // Validate each seat in the input
+                        validInput = true;
+                        for (String seat : seats) {
+                            seat = seat.trim();
+
+                            // Check format (e.g., "A-1")
+                            if (!seat.matches("^[A-Z]-\\d+$")) {
+                                System.out.println(RED + "Invalid format for seat: " + seat + RESET);
+                                validInput = false;
+                                break;
+                            }
+                            String[] seatPart =seat.split("-");
+                            char rowLetter = seatPart[0].charAt(0);
+                            int colNumber = Integer.parseInt(seatPart[1]);
+
+
+                            if (rowLetter < 'A'|| rowLetter >= 'A' + row){
+                                System.out.println(RED + "Row out of bounds for seat: " + seat + RESET);
+                                validInput = false;
+                                break;
+                            }
+                            if (colNumber < 1 || colNumber > col) {
+                                System.out.println(RED + "Column out of bounds for seat: " + seat + RESET);
+                                validInput = false;
+                                break;
+                            }
+
+                        }
                     }
+
+
                     for (String seat : seats) {
                         String[] seatParts = seat.split("-");
                         char rowLetter = seatParts[0].charAt(0);
